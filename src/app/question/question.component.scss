@@ -1,0 +1,13 @@
+:host {
+    margin:0;
+    height:100vh;
+    display:grid;             
+    place-items: center;
+}
+
+.questionBlock{
+    width: 50vw;
+    height: 25rem;
+    border: 1px solid black;
+    padding: 0.5rem;
+}

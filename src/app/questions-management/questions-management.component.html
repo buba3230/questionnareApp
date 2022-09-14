@@ -1,0 +1,24 @@
+<a routerLink="/question" class="btn" routerLinkActive="active">Create question</a>
+<table class="questionsListTable">
+    <tr>
+        <th *ngFor="let title of tableHeaders">{{title}}</th>
+    </tr>
+    <tr *ngFor="let question of questionList;">
+            <td>{{question.text}}</td>
+            <td>{{question.type}}</td>
+            <td>{{question.creatingDate | date:'short'}}</td>
+            <td>
+                <div class="panel">
+                    <ng-container *ngIf="question.id != deleteId">
+                        <button class="btn btn--secondary" (click)="editQuestion(question.id)">Edit</button>
+                        <button class="btn btn--secondary btn--secondary__red" (click)="deleteQuestion(question.id)">Delete</button>
+                    </ng-container>
+                    <ng-container *ngIf="question.id === deleteId && !isDeleting">
+                        Delete???
+                        <button class="btn btn--secondary btn--secondary__red" (click)="delete(question.id)">Delete</button>
+                        <button class="btn btn--secondary btn--secondary__green" (click)="cancelDelete()">Cancel</button>
+                    </ng-container>
+                </div>
+            </td>
+    </tr>
+</table>
