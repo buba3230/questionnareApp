@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { QuestionInterface, TypeInterface } from '../shared/interfaces';
 
 import { StorageService } from '../storage.service';
 
@@ -8,7 +9,8 @@ import { StorageService } from '../storage.service';
   styleUrls: ['./questions-list.component.scss']
 })
 export class QuestionsListComponent implements OnInit {
-
+  allQuestions: QuestionInterface[] = JSON.parse(this.storageService.getData('questions'));
+  allTypes: TypeInterface[] = JSON.parse(this.storageService.getData('types'));
   constructor(private storageService: StorageService) {
 
   }

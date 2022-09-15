@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { TypeInterface } from '../shared/interfaces';
 import { StorageService } from '../storage.service';
@@ -14,7 +15,7 @@ import { StorageService } from '../storage.service';
 export class QuestionTypesComponent implements OnInit {
   toggleBlock = false;
   type: TypeInterface = { id: 0, name: "" };
-  constructor(private storageService: StorageService) { }
+  constructor(private storageService: StorageService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -36,6 +37,10 @@ export class QuestionTypesComponent implements OnInit {
       this.type = { id: 0, name: "" };
     }
 
+  }
+
+  gotoList(): void {
+    this.router.navigate(['/']);
   }
 
 }

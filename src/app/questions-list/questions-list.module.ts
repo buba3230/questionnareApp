@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { QuestionsListComponent } from './questions-list.component'
+import { CardComponent } from '../card/card.component';
+import { CardModule } from '../card/card.module';
 
 const routes: Routes = [
     {
@@ -16,6 +18,7 @@ const routes: Routes = [
     declarations: [QuestionsListComponent],
     imports: [
         CommonModule,
+        CardModule,
         RouterModule.forChild(routes),
     ],
     exports: [

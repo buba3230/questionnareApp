@@ -1,0 +1,44 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 220px;
+    width: 100%;
+    border: 1px solid black;
+    margin: 1rem;
+    overflow-y: auto;
+}
+
+.questionText {
+    height: 25%;
+    background: beige;
+    border-bottom: 1px solid black;
+    padding: 0.5rem;
+}
+
+.fullwidth {
+    width: 100%;
+}
+
+.propositions {
+    height: 100%;
+    padding: 0.5rem;
+
+    form {
+        height: 100%;
+    }
+
+    .answer {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-between;
+
+        
+
+        .inputs {
+            display: flex;
+            width: 100%;
+        }
+    }
+}

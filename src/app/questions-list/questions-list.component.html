@@ -5,7 +5,9 @@
 
 <div class="questionnare">
     <div class="answered">
-
+        <ng-container *ngFor="let question of allQuestions;">
+            <card [question]="question" [types]="allTypes"></card>
+        </ng-container>
     </div>
     <div class="unanswered">
         

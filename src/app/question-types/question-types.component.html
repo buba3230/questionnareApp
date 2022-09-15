@@ -1,6 +1,10 @@
 
 <div class="formBlock">
-<button (click)="toggleBlock=!toggleBlock" class="btn">Add question type</button>
+    <div class="panel">
+        <button (click)="gotoList()" class="btn">Return to Questions List</button>
+        <button (click)="toggleBlock=!toggleBlock" class="btn">Add question type</button>
+    </div>
+
 <ng-container *ngIf="toggleBlock">
     <form (ngSubmit)='onSubmit(typeForm)' #typeForm="ngForm" class="form">
         <div class="formGroup">

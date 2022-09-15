@@ -32,7 +32,7 @@
                 <label for="type" class="left">Type: </label>
                 <div class="right">
                     <ng-container *ngFor="let qType of questionTypes">
-                        <input type="radio" id="contactChoice1" name="type" [id]="type" [value]="qType.id"
+                        <input type="radio" name="type" [id]="type" [value]="qType.id"
                         [(ngModel)]='question.type'
                         ngModel #type = 'ngModel'>
                         {{qType.name}}

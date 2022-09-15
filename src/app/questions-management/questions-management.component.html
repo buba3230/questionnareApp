@@ -1,4 +1,7 @@
-<a routerLink="/question" class="btn" routerLinkActive="active">Create question</a>
+<div class="panel">
+    <a routerLink="/" class="btn" routerLinkActive="active">Return to Questions List</a>
+    <a routerLink="/question" class="btn" routerLinkActive="active">Create question</a>
+</div>
 <table class="questionsListTable">
     <tr>
         <th *ngFor="let title of tableHeaders">{{title}}</th>

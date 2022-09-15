@@ -24,3 +24,9 @@ export interface QuestionListItemInterface {
     type: string;
     creatingDate: Date;
 }
+
+export interface AnswerInterface {
+    id: number;
+    selPropositions: string[];
+    openAnswer: string;
+}

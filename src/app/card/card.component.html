@@ -1,0 +1,60 @@
+<div class="questionText">
+    {{question.text}}
+</div>
+<div class="propositions">
+    <ng-container *ngIf="isOpen">
+        <form (ngSubmit)='onOpenSubmit(openForm)' #openForm="ngForm">
+            <div class="answer">
+                <div class="inputs">
+                    <label for="openAnswer">Your answer:</label>
+                    <input 
+                        type="text" 
+                        name="openAnswer" 
+                        id="openAnswer"
+                        ngModel #openAnswer = 'ngModel'
+                        required
+                        class="fullwidth"
+                    >
+                </div>
+                <button type="submit" [disabled]="openForm.invalid" class="btn">SAVE</button>
+            </div>
+                
+        </form>
+    </ng-container>
+    <ng-container *ngIf="isSingle">
+        <form (ngSubmit)='onSingleSubmit(singleForm, question.id)' #singleForm="ngForm">
+            <div class="answer">
+                <div class="inputs">
+                    <input type="radio" name="single" [id]="question.answeredOptions.a" value="a" required
+                    ngModel #selectedBy = 'ngModel'>
+                    <label [for]="question.answeredOptions.a">{{question.answeredOptions.a}}</label>
+                </div>
+                <div class="inputs">
+                    <input type="radio" name="single" [id]="question.answeredOptions.b" value="b" required
+                    ngModel #selectedBy = 'ngModel'>
+                    <label [for]="question.answeredOptions.b">{{question.answeredOptions.b}}</label>
+                </div>
+                <div class="inputs">
+                    <input type="radio" name="single" [id]="question.answeredOptions.c" value="c" required
+                    ngModel #selectedBy = 'ngModel'>
+                    <label [for]="question.answeredOptions.c">{{question.answeredOptions.c}}</label>
+                </div>
+                <button type="submit" [disabled]="selectedBy.errors?.required" class="btn">SAVE</button>
+            </div>
+        </form>
+    </ng-container>
+    <ng-container *ngIf="isMultiple">
+        <form (ngSubmit)='onMultipleSubmit(multipleForm, question.id)' #multipleForm="ngForm">
+            <div class="answer">
+                <div class="inputs" *ngFor="let data of multipleData; let i=index">
+                        <label>
+                          <input type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)" />
+                          {{data.text}}
+                        </label>
+                </div>
+                <button type="submit" [disabled]="(!checkArray) || (checkArray && checkArray.value.length < 2)" class="btn">SAVE</button>
+            </div>
+            
+        </form>
+    </ng-container>
+</div>
