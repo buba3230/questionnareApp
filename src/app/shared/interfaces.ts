@@ -14,7 +14,7 @@ export interface QuestionInterface {
     text: string;
     type: number;
     answeredOptions: AnsweredOptionsInterface;
-
+    answer?: AnswerInterface;
     creatingDate: Date;
 }
 
@@ -28,5 +28,14 @@ export interface QuestionListItemInterface {
 export interface AnswerInterface {
     id: number;
     selPropositions: string[];
+    openAnswer: string;
+    answerDate: Date;
+}
+
+export interface NormalizeAnswerInterface {
+    id: number;
+    a: string;
+    b: string;
+    c: string;
     openAnswer: string;
 }

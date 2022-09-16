@@ -2,6 +2,7 @@
     <div class="panel">
         <button (click)="goToManagement()" class="btn">Return to management</button>
     </div>
+    <ng-container *ngIf="questionTypes; else NoItems">
     <div class="questionFormBlock">
         <form (ngSubmit)='onSubmit(questionForm)' #questionForm="ngForm" class="form">
             <div class="formGroup">
@@ -77,4 +78,11 @@
             <button type="submit" [disabled]="questionForm.invalid" class="btn">SAVE</button>
         </form>
     </div>
+</ng-container>
 </div>
+
+<ng-template #NoItems>
+    <div class="alert">
+        <h1>Ypu have to add types of questions!</h1>
+    </div>
+</ng-template>

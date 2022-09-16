@@ -2,6 +2,7 @@
     <a routerLink="/" class="btn" routerLinkActive="active">Return to Questions List</a>
     <a routerLink="/question" class="btn" routerLinkActive="active">Create question</a>
 </div>
+<ng-container *ngIf="questionList; else NoItems">
 <table class="questionsListTable">
     <tr>
         <th *ngFor="let title of tableHeaders">{{title}}</th>
@@ -25,3 +26,10 @@
             </td>
     </tr>
 </table>
+</ng-container>
+
+<ng-template #NoItems>
+    <div class="alert">
+        <h1>There is no questions</h1>
+    </div>
+</ng-template>

@@ -2,14 +2,25 @@
     <a routerLink="/questions-management" class="btn" routerLinkActive="active">Questions management</a>
     <a routerLink="/question-types" class="btn" routerLinkActive="active">Question types</a>
 </div>
-
+<ng-container *ngIf="allQuestions; else NoItems">
 <div class="questionnare">
-    <div class="answered">
+    <div class="unanswered">
+        <h1>Unanswered</h1>
         <ng-container *ngFor="let question of allQuestions;">
-            <card [question]="question" [types]="allTypes"></card>
+            <card *ngIf="!question.answer" [question]="question" [types]="allTypes" (submited)="bindAction($event)"></card>
         </ng-container>
     </div>
-    <div class="unanswered">
-        
+    <div class="answered">
+        <h1>Answered</h1>
+        <ng-container *ngFor="let question of answeredQuestions;">
+            <card *ngIf="question.answer" [question]="question" [types]="allTypes" (submited)="bindAction($event)"></card>
+        </ng-container>
     </div>
 </div>
+</ng-container>
+
+<ng-template #NoItems>
+    <div class="alert">
+        <h1>There is no questions</h1>
+    </div>
+</ng-template>

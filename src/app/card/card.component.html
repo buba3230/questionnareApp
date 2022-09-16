@@ -3,56 +3,86 @@
 </div>
 <div class="propositions">
     <ng-container *ngIf="isOpen">
-        <form (ngSubmit)='onOpenSubmit(openForm)' #openForm="ngForm">
+        <form (ngSubmit)='onOpenSubmit(openForm, question.id)' #openForm="ngForm">
             <div class="answer">
+                <div [ngClass]="{'disable': isDisable}">
                 <div class="inputs">
                     <label for="openAnswer">Your answer:</label>
                     <input 
                         type="text" 
                         name="openAnswer" 
                         id="openAnswer"
+                        [(ngModel)]='answer.openAnswer'
                         ngModel #openAnswer = 'ngModel'
                         required
                         class="fullwidth"
+                        maxlength="255"
                     >
                 </div>
-                <button type="submit" [disabled]="openForm.invalid" class="btn">SAVE</button>
+                </div>
+                <ng-container *ngIf="!question.answer">
+                    <button type="submit" [disabled]="openForm.invalid" class="btn">SAVE</button>
+                </ng-container>
+                <ng-container *ngIf="question.answer">
+                    <button (click)="restore(question.id)" class="btn">DELETE ANSWER</button>
+                </ng-container>
             </div>
-                
         </form>
     </ng-container>
     <ng-container *ngIf="isSingle">
-        <form (ngSubmit)='onSingleSubmit(singleForm, question.id)' #singleForm="ngForm">
+        <form (ngSubmit)='onSingleSubmit(question.id)'>
             <div class="answer">
+                <div [ngClass]="{'disable': isDisable}">
                 <div class="inputs">
-                    <input type="radio" name="single" [id]="question.answeredOptions.a" value="a" required
-                    ngModel #selectedBy = 'ngModel'>
-                    <label [for]="question.answeredOptions.a">{{question.answeredOptions.a}}</label>
+                    <label>
+                        <input type="radio" name="single" value="a" (click)="onRadioChange($event)" [checked]="normalizeAnswer.a ? true : false" />
+                        {{question.answeredOptions.a}}
+                    </label>
                 </div>
                 <div class="inputs">
-                    <input type="radio" name="single" [id]="question.answeredOptions.b" value="b" required
-                    ngModel #selectedBy = 'ngModel'>
-                    <label [for]="question.answeredOptions.b">{{question.answeredOptions.b}}</label>
+                    <label>
+                        <input type="radio" name="single" value="b" (click)="onRadioChange($event)" [checked]="normalizeAnswer.b ? true : false"/>
+                        {{question.answeredOptions.b}}
+                    </label>
                 </div>
                 <div class="inputs">
-                    <input type="radio" name="single" [id]="question.answeredOptions.c" value="c" required
-                    ngModel #selectedBy = 'ngModel'>
-                    <label [for]="question.answeredOptions.c">{{question.answeredOptions.c}}</label>
+                    <label>
+                        <input type="radio" name="single" value="c"  (click)="onRadioChange($event)" [checked]="normalizeAnswer.c ? true : false"/>
+                        {{question.answeredOptions.c}}
+                      </label>
                 </div>
-                <button type="submit" [disabled]="selectedBy.errors?.required" class="btn">SAVE</button>
+                </div>
+                <div class="panel">
+                    <ng-container *ngIf="!question.answer">
+                        <button type="submit" [disabled]="!checkArray" class="btn">SAVE</button>
+                    </ng-container>
+                    <ng-container *ngIf="question.answer">
+                        <button (click)="restore(question.id)" class="btn">DELETE ANSWER</button>
+                    </ng-container>
+                </div>
             </div>
         </form>
     </ng-container>
     <ng-container *ngIf="isMultiple">
-        <form (ngSubmit)='onMultipleSubmit(multipleForm, question.id)' #multipleForm="ngForm">
+        <form (ngSubmit)='onMultipleSubmit(question.id)'>
             <div class="answer">
-                <div class="inputs" *ngFor="let data of multipleData; let i=index">
+                <div [ngClass]="{'disable': isDisable}">
+                    <div class="inputs" *ngFor="let data of multipleData; let i=index">
                         <label>
-                          <input type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)" />
+                          <input type="checkbox" [value]="data.value" [(ngModel)]="normalizeAnswer[data.value]" [name]="data.value" (change)="onCheckboxChange($event)"/>
                           {{data.text}}
                         </label>
+                    </div>
                 </div>
-                <button type="submit" [disabled]="(!checkArray) || (checkArray && checkArray.value.length < 2)" class="btn">SAVE</button>
+                <div class="panel">
+                    <ng-container *ngIf="!question.answer">
+                        <button type="submit" [disabled]="(!checkArray) || (checkArray && checkArray.value.length < 2)" class="btn">SAVE</button>
+                    </ng-container>
+                    <ng-container *ngIf="question.answer">
+                        <button (click)="restore(question.id)" class="btn">DELETE ANSWER</button>
+                    </ng-container>
+                </div>
+                
             </div>
             
         </form>

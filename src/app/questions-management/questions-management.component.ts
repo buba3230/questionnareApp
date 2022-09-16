@@ -17,7 +17,10 @@ export class QuestionsManagementComponent implements OnInit {
   deleteId: number;
   isDeleting = false;
   constructor(private storageService: StorageService, private router: Router) {
-    this.questionList = this.normalizeLlist(this.allQuestion, this.allTypes);
+    if (this.allQuestion && this.allTypes) {
+      this.questionList = this.normalizeLlist(this.allQuestion, this.allTypes);
+    }
+
   }
 
   ngOnInit(): void {
