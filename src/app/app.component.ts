@@ -15,7 +15,7 @@ export class AppComponent implements OnDestroy {
     this.subscription = router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         if (!router.navigated) {
-          //this.storageService.clearData();
+          this.storageService.clearData();
         }
       }
     });
